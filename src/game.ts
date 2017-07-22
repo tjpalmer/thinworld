@@ -15,13 +15,19 @@ export class Game {
       new PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
     this.camera.position.z = 5;
     renderer.setSize(canvas.width, canvas.height);
-    canvas.style.width = '500px';
+    canvas.style.width = '100%';
+    // Resize handling after renderer and camera.
+    window.addEventListener('resize', () => this.resize());
+    this.resize();
+    // Scene.
     let scene = this.scene = new Scene();
-    scene.add(new AmbientLight(0xFFFFFF, 0.5));
+    // Some needful lighting.
+    scene.add(new AmbientLight(0xFFFFFF));
     let light = new DirectionalLight(0xFFFFFF);
     light.position.set(0, 5, 5);
     scene.add(light);
     scene.add(light.target);
+    // Sample scene.
     let geo = new BoxGeometry(1, 1, 1);
     let material = new MeshPhysicalMaterial({color: 0xFFBB33});
     let cube = this.cube = new Mesh(geo, material);
@@ -43,6 +49,16 @@ export class Game {
   cube: Mesh;
 
   renderer: WebGLRenderer;
+
+  resize() {
+    this.renderer.setSize(1, 1);
+    let canvas = this.renderer.domElement;
+    window.setTimeout(() => {
+      let canvas = this.renderer.domElement;
+      this.renderer.setSize(1, window.innerHeight);
+      canvas.style.width = '100%';
+    }, 10);
+  }
 
   scene: Scene;
 

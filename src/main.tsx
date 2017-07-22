@@ -9,8 +9,13 @@ function init() {
   // let hi = new Hello();
   // hi.hi();
   render(
-    <canvas id="canvas" height="500" width="1"></canvas>,
-    window.document.getElementById('root')!
+    <canvas
+      height="500"
+      id="canvas"
+      style="left: 0; position: absolute; top: 0"
+      width="1">
+    </canvas>,
+    window.document.body!
   );
   let game = new Game(
     window.document.getElementById('canvas') as HTMLCanvasElement
