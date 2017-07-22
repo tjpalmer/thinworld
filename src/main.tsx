@@ -9,7 +9,7 @@ function init() {
   // let hi = new Hello();
   // hi.hi();
   render(
-    <canvas id="canvas" height="500" width="500"></canvas>,
+    <canvas id="canvas" height="500" width="1"></canvas>,
     window.document.getElementById('root')!
   );
   let game = new Game(
