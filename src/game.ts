@@ -40,6 +40,9 @@ export class Game {
     let ceiling = floor.clone();
     ceiling.position.y = 5;
     scene.add(ceiling);
+    // Input.
+    window.addEventListener('keydown', event => this.onKey(event, true));
+    window.addEventListener('keyup', event => this.onKey(event, false));
   }
 
   camera: PerspectiveCamera;
@@ -47,6 +50,12 @@ export class Game {
   canvas: HTMLCanvasElement;
 
   cube: Mesh;
+
+  onKey(event: KeyboardEvent, down: boolean) {
+    this.keys.set(event.key, down);
+  }
+
+  keys = new Map<string, boolean>();
 
   renderer: WebGLRenderer;
 
@@ -69,7 +78,22 @@ export class Game {
   step = () => {
     window.requestAnimationFrame(this.step);
     this.cube.rotation.x += 0.05;
+    velocity.set(0, 0);
+    if (this.keys.get('ArrowUp')) {
+      velocity.y = 1;
+    } else if (this.keys.get('ArrowDown')) {
+      velocity.y = -1;
+    }
+    if (this.keys.get('ArrowRight')) {
+      velocity.x = -1;
+    } else if (this.keys.get('ArrowLeft')) {
+      velocity.x = 1;
+    }
+    this.camera.position.z += 0.2 * velocity.x;
+    this.camera.position.y += 0.2 * velocity.y;
     this.renderer.render(this.scene, this.camera);
   }
 
 }
+
+let velocity = new Vector2();
