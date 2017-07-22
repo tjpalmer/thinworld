@@ -5,6 +5,7 @@ declare global {
       props: {};
     }
     interface IntrinsicElements {
+      canvas: any;
       div: any;
     }
   }

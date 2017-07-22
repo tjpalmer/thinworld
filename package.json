@@ -6,15 +6,18 @@
     "type": "git",
     "url": "about:blank"
   },
-  "dependencies": {},
+  "dependencies": {
+    "three": "^0.86.0"
+  },
   "devDependencies": {
+    "@types/three": "^0.84.18",
     "awesome-typescript-loader": "^3.2.1",
     "typescript": "^2.4.1",
     "webpack": "^3.2.0",
     "webpack-dev-server": "^2.5.1"
   },
   "scripts": {
-    "prepublish": "webpack --color -p",
+    "prepublish": "webpack --color",
     "watch": "webpack-dev-server --color -d --port 52018"
   }
 }

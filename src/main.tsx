@@ -1,17 +1,21 @@
-import {React, render} from './index';
+import {Game, React, render} from './index';
 
 function init() {
-  console.log('Hi!');
-  let name = 'world';
-  let clazz = 'that<>""';
-  console.log(<Hi name={name}><Hello>Inside!</Hello> More</Hi>);
-  console.log();
-  let hi = new Hello();
-  hi.hi();
+  // console.log('Hi!');
+  // let name = 'world';
+  // let clazz = 'that<>""';
+  // console.log(<Hi name={name}><Hello>Inside!</Hello> More</Hi>);
+  // console.log();
+  // let hi = new Hello();
+  // hi.hi();
   render(
-    <div class={clazz}>Hi, {name}!</div>,
-    document.getElementById('root')!
+    <canvas id="canvas" height="500" width="500"></canvas>,
+    window.document.getElementById('root')!
   );
+  let game = new Game(
+    window.document.getElementById('canvas') as HTMLCanvasElement
+  );
+  game.start();
 }
 
 type Props = {

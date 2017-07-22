@@ -7,6 +7,9 @@ module.exports = {
   },
   entry: {
     app: './src/main.tsx',
+    vendor: [
+      'three',
+    ],
   },
   module: {
     loaders: [
@@ -18,9 +21,16 @@ module.exports = {
   },
   output: {filename: "app.js"},
   plugins: [
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor', filename: 'vendor.js',
+    }),
     new webpack.optimize.ModuleConcatenationPlugin(),
   ],
   resolve: {
     extensions: ['.js', '.ts', '.tsx'],
   },
 };
+
+// if (prod) {
+//   module.exports.resolve.alias.three = 'three/build/three.min.js';
+// }
