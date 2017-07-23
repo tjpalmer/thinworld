@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     app: './src/main.tsx',
     vendor: [
+      'matter-js',
       'three',
     ],
   },
