@@ -1,3 +1,4 @@
+// let prod = process.argv.indexOf('-p') >= 0;
 let webpack = require('webpack');
 
 module.exports = {
