@@ -25,11 +25,12 @@ export class Game {
     let renderer = this.renderer = new WebGLRenderer({canvas});
     this.camera =
       new PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
+    this.camera.rotation.order = 'ZXY';
     this.camera.position.set(-5, 2, 0);
+    this.camera.up.set(0, 0, -1);
     this.camera.lookAt(new Vector3());
     this.camera.updateProjectionMatrix();
     renderer.setSize(canvas.width, canvas.height);
-    canvas.style.width = '100%';
     // Resize handling after renderer and camera.
     window.addEventListener('resize', () => this.resize());
     this.resize();
@@ -91,8 +92,8 @@ export class Game {
     let canvas = this.renderer.domElement;
     window.setTimeout(() => {
       let canvas = this.renderer.domElement;
-      this.renderer.setSize(1, window.innerHeight);
-      canvas.style.width = '100%';
+      this.renderer.setSize(window.innerWidth, 1);
+      canvas.style.height = '100%';
     }, 10);
   }
 
@@ -125,11 +126,23 @@ export class Game {
       velocity.x = -1;
     }
     let speed = 0.2;
-    this.camera.position.x += speed * velocity.x;
-    this.camera.position.y += speed * velocity.y;
+    // this.camera.position.x += speed * velocity.x;
+    // this.camera.position.y += speed * velocity.y;
+    this.camera.rotation.z += 0.05 * velocity.x;
+    // this.camera.rotation.x = 0;
+    // this.camera.rotation.y = 0;
+    let direction = this.camera.getWorldDirection();
+    move.set(direction.x, direction.y).multiplyScalar(speed * velocity.y);
+    this.camera.position.x += move.x;
+    this.camera.position.y += move.y;
+    // if (velocity.x) {
+    //   console.log(this.camera.getWorldDirection());
+    // }
+    this.camera.updateProjectionMatrix();
     this.renderer.render(this.scene, this.camera);
   }
 
 }
 
+let move = new Vector2();
 let velocity = new Vector2();

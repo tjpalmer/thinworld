@@ -10,7 +10,7 @@ function init() {
   // hi.hi();
   render(
     <canvas
-      height="500"
+      height="1"
       id="canvas"
       style="left: 0; position: absolute; top: 0"
       width="1">
