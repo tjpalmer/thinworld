@@ -31,7 +31,7 @@ class Hello {
   hi = () => console.log('Hi from', this);
   props: Props & {
     name?: string;
-  };
+  } = {};
   render() {
     console.log('render!');
   }
@@ -40,7 +40,7 @@ class Hello {
 class Hi extends Hello {
   props: Hello['props'] & {
     color?: string;
-  };
+  } = {};
 }
 
 // const styles = {
