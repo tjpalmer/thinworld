@@ -8,6 +8,8 @@ import {
   ShaderMaterial, Vector2, Vector3, WebGLRenderer,
 } from 'three';
 
+let vertical = true;
+
 export class Game {
 
   constructor(canvas: HTMLCanvasElement) {
@@ -27,7 +29,11 @@ export class Game {
       new PerspectiveCamera(75, canvas.width / canvas.height, 0.1, 1000);
     this.camera.rotation.order = 'ZXY';
     this.camera.position.set(10, 8, 0);
-    this.camera.up.set(0, 0, -1);
+    if (vertical) {
+      this.camera.up.set(0, 1, 0);
+    } else {
+      this.camera.up.set(0, 0, -1);
+    }
     this.camera.lookAt(new Vector3());
     this.camera.updateProjectionMatrix();
     renderer.setSize(canvas.width, canvas.height);
@@ -92,8 +98,13 @@ export class Game {
     let canvas = this.renderer.domElement;
     window.setTimeout(() => {
       let canvas = this.renderer.domElement;
-      this.renderer.setSize(window.innerWidth, 1);
-      canvas.style.height = '100%';
+      if (vertical) {
+        this.renderer.setSize(1, window.innerHeight);
+        canvas.style.width = '100%';
+      } else {
+        this.renderer.setSize(window.innerWidth, 1);
+        canvas.style.height = '100%';
+      }
     }, 10);
   }
 
